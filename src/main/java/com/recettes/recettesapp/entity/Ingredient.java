@@ -25,7 +25,23 @@ public class Ingredient {
 	private UniteDeMesure uniteDeMesure;
 
 	@ManyToOne
-	private Recette recipe;
+	private Recette recette;
+	
+	public Ingredient() {
+	}
+
+	public Ingredient(String description, BigDecimal quantite, UniteDeMesure uniteDeMesure) {
+		this.description = description;
+		this.quantite = quantite;
+		this.uniteDeMesure = uniteDeMesure;
+	}
+
+	public Ingredient(String description, BigDecimal quantite, UniteDeMesure uniteDeMesure, Recette recette) {
+		this.description = description;
+		this.quantite = quantite;
+		this.uniteDeMesure = uniteDeMesure;
+		this.recette = recette;
+	}
 
 	public Long getId() {
 		return id;
@@ -59,14 +75,14 @@ public class Ingredient {
 		this.uniteDeMesure = uniteDeMesure;
 	}
 
-	public Recette getRecipe() {
-		return recipe;
+	public Recette getRecette() {
+		return recette;
 	}
 
-	public void setRecipe(Recette recipe) {
-		this.recipe = recipe;
+	public void setRecette(Recette recette) {
+		this.recette = recette;
 	}
-	
+
 	
 
 }

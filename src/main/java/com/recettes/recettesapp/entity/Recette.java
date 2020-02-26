@@ -54,7 +54,7 @@ public class Recette {
     private Set<Categorie> listeCategories = new HashSet<>();
     
     public Recette ajouterIngredient(Ingredient ingredient){
-        ingredient.setRecipe(this);
+        ingredient.setRecette(this);
         this.ingredients.add(ingredient);
         return this;
     }

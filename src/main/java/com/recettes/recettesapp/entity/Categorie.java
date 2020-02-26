@@ -2,11 +2,13 @@ package com.recettes.recettesapp.entity;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+@Entity	
 public class Categorie {
 	
 	@Id
@@ -15,7 +17,7 @@ public class Categorie {
     
 	private String description;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "listeCategories")
     private Set<Recette> recette;
 
 	public Long getId() {
