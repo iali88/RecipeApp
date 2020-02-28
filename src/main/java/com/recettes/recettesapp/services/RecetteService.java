@@ -8,6 +8,6 @@ public interface RecetteService {
 
 	Set<Recette> getRecettes();
 	
-	Recette findById(Long l);
+	Recette findById(Long id);
 	
 }

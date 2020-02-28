@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8"/>
+	    <title>Détail de la recette</title>
+	
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+	          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+	
+	    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+	
+	    <!-- Bootstrap JavaScript -->
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}">
+	    </script>
+	    
+	</head>
+	
+	<body>
+		<div class="container-fluid" style="margin-top: 20px">
+		    <div class="row">
+		        <div class="col-md-6 col-md-offset-3">
+		            <div class="pannel-group">
+		                
+		                <div class="panel panel-primary">
+		                    
+		                    <div class="panel-heading">
+		                        <h1 class="panel-title" th:text="${recette.description}">Titre recette</h1>
+		                    </div>
+		                    
+		                    <div class="panel-body">
+		                        <div class="row">
+		                            <div class="col-md-3">
+		                                <h5 style="font-weight: bold;">Catégories:</h5>
+		                            </div>
+		                            <div class="col-md-3">
+		                                <ul class="list-group">
+		                                    <li th:remove="all">Plat</li>
+		                                    <li th:remove="all">Cuisine mexicaine</li>
+		                                    <li th:each="categorie : ${recette.listeCategories}" th:text="${categorie.description}">Cuisine rapide</li>
+		                                </ul>
+		                            </div>
+		                        </div>
+		                        
+		                        <div class="row">
+		                            <div class="col-md-3">
+		                               <strong> <p>Temps de préparation :</p></strong>
+		                            </div>
+		                            <div class="col-md-3">
+		                                <p th:text="${(recette.tpsPreparation) +  '  Min'}">30 min</p>
+		                            </div>
+		                            <div class="col-md-3">
+		                                <strong><p>Niveau:</p></strong>
+		                            </div>
+		                            <div class="col-md-3">
+		                                <p th:text="${recette.niveau}">Facile</p>
+		                            </div>
+		                        </div>
+		                        
+		                        <div class="row">
+		                            <div class="col-md-3">
+		                                <strong><p>Cuisson :</p></strong>
+		                            </div>
+		                            <div class="col-md-3">
+		                                <p th:text="${(recette.tpsCuisson  +  '  Min')}">30 min</p>
+		                            </div>
+		                            <div class="col-md-3">
+		                               <strong> <p>Nombre de personnes :</p> </strong>
+		                            </div>
+		                            <div class="col-md-3">
+		                                <p th:text="${recette.nbPersonnes}">4</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                
+		                <div class="panel panel-primary">
+		                    <div class="panel-heading">
+		                        <div class="row">
+		                            <div class="col-md-12 ">
+		                                <h1 class="panel-title">Ingredients</h1>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel-body">
+		                        <div class="row">
+		                            <div class="col-md-10">
+		                                <ul>
+		                                    <li th:remove="all">1 Cup of milk</li>
+		                                    <li th:remove="all">1 Teaspoon of chocolate</li>
+		                                    <li th:each="ingredient : ${recette.ingredients}"
+		                                        th:text="${(ingredient.quantite +
+		                                        ' ' + ingredient.uniteDeMesure.description +
+		                                        ' - ' + ingredient.description)}">1 Teaspoon of Sugar</li>
+		                                </ul>
+		                            </div>
+		                            <div class="col-md-2 ">
+		                                <a class="btn btn-outline-primary" href="#" th:href="@{'/recette/' + ${recette.id} + '/ingredients'}" role="button">Modifier</a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-primary">
+		                    <div class="panel-heading">
+		                        <h1 class="panel-title" >Instructions : </h1>
+		                    </div>
+		                    <div class="panel-body">
+		                        <div class="row">
+		                            <div class="col-md-12">
+		                            	<p th:utext="${#strings.replace( #strings.escapeXml( recette.instructions ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}" ></p>
+		                            	<!-- <p th:text="${recette.instructions}">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+		                            	 -->
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-primary">
+		                    <div class="panel-heading">
+		                        <h1 class="panel-title" >Commentaires : </h1>
+		                    </div>
+		                    <div class="panel-body">
+		                        <div class="row">
+		                            <div class="col-md-12">
+		                                <p th:utext="${#strings.replace( #strings.escapeXml( recette.commentaire.commentaireRecette ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}" ></p>
+		                                <!-- <p th:text="${recette.commentaire.commentaireRecette}">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+		                            	-->
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	
+	</body>
+	
+</html>

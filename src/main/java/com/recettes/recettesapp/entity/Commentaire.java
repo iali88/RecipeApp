@@ -18,7 +18,7 @@ public class Commentaire {
     private Recette recette;
 
     @Lob
-    private String CommentaireRecette;
+    private String commentaireRecette;
 
 	public Long getId() {
 		return id;
@@ -37,12 +37,14 @@ public class Commentaire {
 	}
 
 	public String getCommentaireRecette() {
-		return CommentaireRecette;
+		return commentaireRecette;
 	}
 
 	public void setCommentaireRecette(String commentaireRecette) {
-		CommentaireRecette = commentaireRecette;
+		this.commentaireRecette = commentaireRecette;
 	}
+
+	
     
     
 }

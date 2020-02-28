@@ -1,6 +1,7 @@
 package com.recettes.recettesapp.services;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -34,9 +35,15 @@ public class RecetteServiceImpl implements RecetteService {
 	}
 
 	@Override
-	public Recette findById(Long l) {
-		// TODO 
-		return null;
+	public Recette findById(Long id) {
+		
+		Optional<Recette> optRecette = recetteDAO.findById(id); 
+		
+		if (!optRecette.isPresent()) {
+            throw new RuntimeException("Recette non trouvée !");
+        }
+		
+		return optRecette.get();
 	}
 
 }

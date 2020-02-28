@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Ingredient {
+public class Ingredient implements Comparable<Ingredient> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,6 +81,11 @@ public class Ingredient {
 
 	public void setRecette(Recette recette) {
 		this.recette = recette;
+	}
+
+	@Override
+	public int compareTo(Ingredient ingredient) {
+		return id.compareTo(ingredient.getId());
 	}
 
 	

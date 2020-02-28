@@ -53,11 +53,10 @@
 		                                <td>Tasty Goodnees 2</td>
 		                                <td><a href="#">View</a></td>
 		                            </tr>
-		                            
-		                            <tr th:each="recette : ${recettes}">
+		                            <tr th:each="recette : ${#lists.sort(recettes)}">
 		                                <td th:text="${recette.id}">1</td>
 		                                <td th:text="${recette.description}">Titre recette ...</td>
-		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/show'}">Voir</a></td>
+		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/detail'}">Voir</a></td>
 		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/update'}">Editer</a></td>
 		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/delete'}">Supprimer</a></td>
 		                            </tr>

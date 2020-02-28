@@ -10,4 +10,5 @@ public interface UniteDeMesureDAO extends CrudRepository<UniteDeMesure, Long>{
 
 	Optional<UniteDeMesure> findByDescription(String description);
 	
+	
 }

@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Recette {
+public class Recette implements Comparable<Recette>{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -150,7 +150,10 @@ public class Recette {
 	public void setListeCategories(Set<Categorie> listeCategories) {
 		this.listeCategories = listeCategories;
 	}
-    
-    
+
+	@Override
+	public int compareTo(Recette recette) {
+		return id.compareTo(recette.getId());
+	}
 
 }

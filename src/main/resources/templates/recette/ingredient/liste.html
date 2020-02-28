@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		    <meta charset="UTF-8"/>
+		    <title>Liste des ingrédients de la recette</title>
+		
+		    <!-- Bootstrap CSS -->
+		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+		          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+		
+		    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+		
+		    <!-- Bootstrap JavaScript -->
+		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}">
+		    </script>
+		    
+	</head>
+	
+	<body>
+		<div class="container-fluid" style="margin-top: 20px">
+		    <div class="row">
+		        <div class="col-md-6 col-md-offset-3">
+		            <div class="panel panel-primary">
+		
+		                <div class="panel-heading">
+		                    <div class="row">
+		                        <div class="col-md-12 ">
+		                            <h1 class="panel-title">Ingrédients</h1>
+		                        </div>
+		                    </div>
+		
+		                </div>
+		                <div class="panel-body">
+		
+		                    <div class="table-responsive" th:if="${not #lists.isEmpty(recette.ingredients)}">
+		                        <table class="table table-hover ">
+		                            <thead class="thead-inverse">
+		                            <tr>
+		                                <th>ID</th>
+		                                <th>Quantité</th>
+		                                <th>Description</th>
+		                                <th colspan=2 >Action</th>
+		                            </tr>
+		                            </thead>
+		                            <tr th:remove="all">
+		                                <td>123</td>
+		                                <td>Recette</td>
+		                                <td>1</td>
+		                                <td><a href="#">Modifier</a></td>
+		                                <td><a href="#">Supprimer</a></td>
+		                            </tr>
+		                            <tr th:remove="all">
+		                                <td>152</td>
+		                                <td>Recette 2</td>
+		                                <td>1</td>
+		                                <td><a href="#">Modifier</a></td>
+		                                <td><a href="#">Supprimer</a></td>
+		                            </tr>
+		                            <tr th:each="ingredient : ${#lists.sort(recette.ingredients)}">
+		                                <td th:text="${ingredient.id}">334</td>
+							            <td th:text="${#numbers.formatInteger(ingredient.quantite,1)} + ' ' + ${ingredient.uniteDeMesure.description}">2</td>
+		                                <td th:text="${ingredient.description}">ingredients 1 </td>
+		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/ingredient/' + ${ingredient.id} + '/modifier'}">Modifier</a></td>
+		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/ingredient/' + ${ingredient.id} + '/supprimer'}">Supprimer</a></td>
+		                            </tr>
+		                        </table>
+		                    </div>
+		                    
+		                    <a class="btn btn-default" href="#" th:href="@{'/recette/' + ${recette.id} + '/ingredient/ajouter'}" role="button">Ajouter</a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	
+	</body>
+	
+</html>

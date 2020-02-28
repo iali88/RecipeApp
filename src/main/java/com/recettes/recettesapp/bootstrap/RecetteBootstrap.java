@@ -60,24 +60,21 @@ public class RecetteBootstrap implements ApplicationListener<ContextRefreshedEve
 		gclRecette.setTpsCuisson(0);
 		gclRecette.setNiveau(Niveau.FACILE);
 		
-		String instruction_gcl = "\"1 Préparer l'avocat : Couper l'avocat en deux. Enlever le noyau. Découper la chair de l'avocat avec un couteau, puis récupérer à l'aide d'une cuillère.\" +\r\n" + 
-				"                \"\\n\" +\r\n" + 
-				"                \"2 Écraser à l'aide d'une fourchette : Avec une fourcette écraser l'avocat.\" +\r\n" + 
-				"                \"\\n\" +\r\n" + 
-				"                \"3 Assaisonner : Salé et ajouter quelques gouttes de citron préssé. Le citron permettra une meilleur préservation du guacamole.\\n\" +\r\n" + 
-				"                \"Ajouter oignons, coriandre, poivre, piment (ajuster selon goût).\\n\" +\r\n" + 
-				"                \"4 Filmer et mettre au frais : Filmer avec du film alimentaire pour empécher l'oxydation. Mettre au frais.\\n\" +\r\n" + 
-				"                \"Vous pouvez également rajouter des morceaux de tomates juste avant de servir.\\n\" +\r\n" + 
-				"                \"\\n\" +";
+		String instruction_gcl = "1. Préparer l'avocat : Couper l'avocat en deux. Enlever le noyau. Découper la chair de l'avocat avec un couteau, puis récupérer à l'aide d'une cuillère.\r\n" + 
+								 "2. Écraser à l'aide d'une fourchette : Avec une fourcette écraser l'avocat" + 
+				        "\r\n" + "3. Assaisonner : Salé et ajouter quelques gouttes de citron préssé. Le citron permettra une meilleur préservation du guacamole." + 
+				                " Ajouter oignons, coriandre, poivre, piment (ajuster selon goût)." + 
+				        "\r\n" + "4. Filmer et mettre au frais : Filmer avec du film alimentaire pour empécher l'oxydation. Mettre au frais." + 
+				        "\r\n" + "Vous pouvez également rajouter des morceaux de tomates juste avant de servir." +
+				        "\r\n";
 		
 		gclRecette.setInstructions(instruction_gcl);
 		
 		Commentaire gcl_commentaire = new Commentaire();
-		String str_commentaire = "N'hésitez pas à expérimenter ! Essayer du guacamole avec des morceaux d'ananas, de mangues ou de fraises.\n" +
-				                 "La version de base contient uniquement du sel et de l'avocat.\n" +
-				                 "Laissez le noyau dans le guacamole pour le conserver plus longtemps !\n" +
-				                 "\n" +
-				                 "Retrouvez le Mexique et ses saveurs sur le site www.mexique-fr.com.\n";
+		String str_commentaire = "N'hésitez pas à expérimenter ! Essayer du guacamole avec des morceaux d'ananas, de mangues ou de fraises.\r\n" +
+				                 "La version de base contient uniquement du sel et de l'avocat.\r\n" +
+				                 "Laissez le noyau dans le guacamole pour le conserver plus longtemps !\r\n" +
+				                 "Retrouvez le Mexique et ses saveurs sur le site www.mexique-fr.com.\r\n";
 				
 		gcl_commentaire.setCommentaireRecette(str_commentaire);
 		gclRecette.setCommentaire(gcl_commentaire);
@@ -106,22 +103,19 @@ public class RecetteBootstrap implements ApplicationListener<ContextRefreshedEve
         tacos.setNiveau(Niveau.FACILE);
 		
 		String instructions_tacos = 
-				"1 Préparer le grill.\n" +
+				"1 Préparer le grill.\r\n " +
                 "2 Faire la marinade pour le poulet : Dans un saladier, mélanger poudre de piment, origan, cumin, sucre, sel, ail et un zeste d'orange. Ajouter le jus d'orange et l'huile d'olive pour faire une pâte."
                 	+ "Ajouter le poulet et mélanger.\n" +
-                "Mettre de coté pendant que le grill chauffe et preparer les garnitures.\n" +
-                "\n" +
-                "\n" +
-                "3 Cuisson du poulet : Cuire le poulet 3-4 minutes sur chaque coté. Puis déposer le poulet sur une assiette et laisser refroidir 5 minutes.\n" +
-                "4 Tortillas : Toaster les tortillas quelques secondes sur le grill ou sur une poele chaude.\n" +
-                "Envelopper les tortillas dans un tissu afin de les conserver bien chaude.\n" +
-                "5 Assemblage : Découper le poulet en tranches. Sur chaque tortilla, placer la salade, les tranches de poulet, les tranches d'avocats, les radis, les tomates, et les tranches d'oignons. Rajouter une cuillère de crème fraiche.\n" +
-                "\nins\n";
+                "Mettre de coté pendant que le grill chauffe et preparer les garnitures.\r\n" +
+                "3 Cuisson du poulet : Cuire le poulet 3-4 minutes sur chaque coté. Puis déposer le poulet sur une assiette et laisser refroidir 5 minutes.\r\n" +
+                "4 Tortillas : Toaster les tortillas quelques secondes sur le grill ou sur une poele chaude.\r\n" +
+                "Envelopper les tortillas dans un tissu afin de les conserver bien chaude.\r\n" +
+                "5 Assemblage : Découper le poulet en tranches. Sur chaque tortilla, placer la salade, les tranches de poulet, les tranches d'avocats, les radis, les tomates, et les tranches d'oignons. Rajouter une cuillère de crème fraiche.\r\n" ;
 		
 		tacos.setInstructions(instructions_tacos);
 		
 		Commentaire tacos_commentaire = new Commentaire();
-		String str_commentaire2 = "On peut accompagner ces tacos de guacamole et/ou de maïs. Pour une version plus légère, les haricots rouges peuvent être supprimés.\n" +
+		String str_commentaire2 = "On peut accompagner ces tacos de guacamole et/ou de maïs. \r\nPour une version plus légère, les haricots rouges peuvent être supprimés.\r\n" +
 				                 "Bon appétit !\n";
 		tacos_commentaire.setCommentaireRecette(str_commentaire2);
 		tacos.setCommentaire(tacos_commentaire);
