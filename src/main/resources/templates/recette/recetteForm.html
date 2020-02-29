@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		    <meta charset="UTF-8"/>
+		    <title>Modifier recette</title>
+		
+		    <!-- Bootstrap CSS -->
+		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+		          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+		
+		    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+		
+		    <!-- Bootstrap JavaScript -->
+		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}">
+		    </script>
+		    
+	</head>
+	
+	<body>
+		<div class="container-fluid" style="margin-top: 20px">
+		    <div class="row">
+		        <div class="col-md-6 col-md-offset-3">
+		            <form  th:object="${recette}" th:action="@{/recette}" method="post">
+		                
+		                <input type="hidden" th:field="*{id}"/>
+		                
+		                <div class="pannel-group">
+		                    <div class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            <h1 class="panel-title">Description</h1>
+		                        </div>
+		                        <div class="panel-body">
+		                            <div class="row">
+		                                <div class="col-md-9 form-group">
+		                                    <label>Recette :</label>
+		                                    <input type="text" class="form-control" th:field="*{description}"/>
+		                                </div>
+		                            </div>
+		                            <div class="row">
+		                                <div class="col-md-3 form-group">
+		                                    <label>Catégorie :</label>
+		                                    <select class="form-control" th:field="*{listeCategories}">
+		                                        <option th:each="cat : ${categories}"
+		                                                th:value="${cat.id}"
+		                                                th:text="${cat.description}">catégorie
+		                                        </option>
+		                                    </select>
+		                                    <select class="form-control" th:remove="all">
+		                                        <option>Facile</option>
+		                                        <option>Intermédiaire</option>
+		                                        <option>Difficile</option>
+		                                    </select>
+		                                </div>
+		                           <!-- </div>
+		                        		<div class="row"> -->
+		                                
+		                                
+		                                <div class="col-md-3 form-group">
+		                                    <label>Niveau :</label>
+		                                    <select class="form-control" th:field="*{niveau}">
+		                                        <option th:each="niv : ${T(com.recettes.recettesapp.entity.Niveau).values()}"
+		                                                th:value="${niv.name()}"
+		                                                th:text="${niv.name()}">val
+		                                        </option>
+		                                    </select>
+		                                    <select class="form-control" th:remove="all">
+		                                        <option>Facile</option>
+		                                        <option>Intermédiaire</option>
+		                                        <option>Difficile</option>
+		                                    </select>
+		                                </div>
+		                                <div class="col-md-3 form-group">
+		                                    <label>Temps Cuisson (min) :</label>
+		                                    <input type="text" class="form-control" th:field="*{tpsCuisson}"/>
+		                                </div>
+		                            </div> 
+		                            <div class="row">
+		                                <div class="col-md-3 form-group">
+		                                    <label>Nombre de personnes :</label>
+		                                    <input type="text" class="form-control" th:field="*{nbPersonnes}"/>
+		                                </div>
+		                                <div class="col-md-4 form-group">
+		                                    <label>Temps de préparation (min) :</label>
+		                                    <input type="text" class="form-control" th:field="*{tpsPreparation}"/>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <!-- th:if="${session.recette0.id != 0}" -->
+		                    
+		                    <div th:if="${recette.id != 0}" class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            <div class="row">
+		                                <div class="col-md-10 ">
+		                                    <h1 class="panel-title">Ingrédients</h1>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <div class="panel-body">
+		                            <div class="row">
+		                                <div class="col-md-10">
+		                                    <ul th:if="${not #lists.isEmpty(recette.ingredients)}">
+		                                        <li th:remove="all">sel - poivre</li>
+		                                        <li th:remove="all">farine</li>
+		                                        <li th:remove="all">poulet</li>
+		                                        <li th:each="ingredient : ${#lists.sort(recette.ingredients)}"
+		                                            th:text="${(ingredient.quantite +
+		                                        ' ' + ingredient.uniteDeMesure.description +
+		                                        ' - ' + ingredient.description)}">60 g sucre
+		                                        </li>
+		                                    </ul>
+		                                </div>
+		                                <div class="col-md-1">
+		                                    <a class="btn btn-outline-primary" href="#" th:href="@{'/recette/' + ${recette.id} + '/ingredients'}" role="button">Modifier</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                         
+		                    </div>
+		                    <div class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            <h1 class="panel-title">Instructions</h1>
+		                        </div>
+		                        <div class="panel-body">
+		                            <div class="row">
+		                                <div class="col-md-12 form-group">
+		                                    <textarea class="form-control" rows="3" th:field="*{instructions}"></textarea></div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            <h1 class="panel-title">Commentaires</h1>
+		                        </div>
+		                        <div class="panel-body">
+		                            <div class="row">
+		                                <div class="col-md-12 form-group">
+		                                    <textarea class="form-control" rows="3" th:field="*{commentaire.commentaireRecette}"></textarea>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+			            <div class = "col-md-2 col-md-offset-5"> 
+			             	<button type="submit" style="margin-bottom: 60px" class="btn btn-primary">Valider</button>
+			            </div>
+		              </form>
+		        </div>
+		    </div>
+		</div>	
+	
+	</body>
+	
+</html>

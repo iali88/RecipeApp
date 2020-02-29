@@ -59,11 +59,11 @@ public class IngredientServiceImpl implements IngredientService {
 	public Ingredient saveOrUpdate(Ingredient ingredient, String recetteId) {
 
 		Ingredient ingredientFinal;
-		Optional<Recette> recetteCourante = recetteDAO.findById(Long.valueOf(recetteId));
 		
+		// création d'ingrédient
 		if(ingredient.getId() == null) {
 		
-			// creation
+			Optional<Recette> recetteCourante = recetteDAO.findById(Long.valueOf(recetteId));
 			ingredient.setRecette(recetteCourante.get()); 
 			ingredientFinal = ingredientDAO.save(ingredient);
 			

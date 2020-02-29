@@ -57,12 +57,13 @@
 		                                <td th:text="${recette.id}">1</td>
 		                                <td th:text="${recette.description}">Titre recette ...</td>
 		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/detail'}">Voir</a></td>
-		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/update'}">Editer</a></td>
-		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/delete'}">Supprimer</a></td>
+		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/modifier'}">Modifier</a></td>
+		                                <td><a href="#" th:href="@{'/recette/' + ${recette.id} + '/supprimer'}">Supprimer</a></td>
 		                            </tr>
 		                        
 		                        </table>
 		                    </div>
+		                    <a class="btn btn-default" href="#" th:href="@{'/recette/ajouter'}" role="button">Ajouter</a>
 		                </div>
 		            </div>
 		        </div>

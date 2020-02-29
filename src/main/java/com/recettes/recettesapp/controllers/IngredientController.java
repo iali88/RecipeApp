@@ -1,6 +1,7 @@
 package com.recettes.recettesapp.controllers;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.recettes.recettesapp.entity.Ingredient;
-import com.recettes.recettesapp.entity.Recette;
 import com.recettes.recettesapp.entity.UniteDeMesure;
-import com.recettes.recettesapp.repositories.RecetteDAO;
 import com.recettes.recettesapp.services.IngredientService;
 import com.recettes.recettesapp.services.RecetteService;
 import com.recettes.recettesapp.services.UniteDeMesureService;
@@ -37,7 +36,7 @@ public class IngredientController {
 	}
 
 	@GetMapping("/{recetteId}/ingredients")
-	public String afficherListeIngredients(@PathVariable String recetteId, Model model) {
+	public String afficherListeIngredients(HttpSession session ,  @PathVariable String recetteId, Model model) {
 		
 		model.addAttribute("recette", recetteService.findById(Long.valueOf(recetteId)));
 		
@@ -56,19 +55,21 @@ public class IngredientController {
 	}
 
 	@PostMapping("/{recetteId}/ingredient")
-	public String saveOrUpdateIngredient(@PathVariable String recetteId, @ModelAttribute Ingredient ingredient ) {
+	public String saveOrUpdateIngredient(HttpServletRequest req, @PathVariable String recetteId, @ModelAttribute Ingredient ingredient ) {
 
 		Ingredient ingredientSaved = ingredientService.saveOrUpdate(ingredient, recetteId);
 		
-		return "redirect:/recette/"+recetteId+"/ingredients" ;
+		return "redirect:/recette/"+ingredientSaved.getRecette().getId()+"/ingredients" ;
 	}
 	
 	@GetMapping("/{recetteId}/ingredient/ajouter")
-	public String afficherFormulaireAjoutIngredient(@PathVariable String recetteId, Model model) {
+	public String afficherFormulaireAjoutIngredient(HttpSession session, @PathVariable String recetteId, Model model) {
 		
 		// ingrédient sans id, l'id sera généré par Hibernate lors de la sauvegarde
 		Ingredient ingredient = new Ingredient();
+		
 		ingredient.setRecette(recetteService.findById(Long.valueOf(recetteId)));
+		
 		ingredient.setUniteDeMesure(new UniteDeMesure());
 		
 		model.addAttribute("ingredient", ingredient);

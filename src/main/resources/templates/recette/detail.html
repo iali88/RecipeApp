@@ -89,17 +89,19 @@
 		                        <div class="row">
 		                            <div class="col-md-10">
 		                                <ul>
-		                                    <li th:remove="all">1 Cup of milk</li>
-		                                    <li th:remove="all">1 Teaspoon of chocolate</li>
-		                                    <li th:each="ingredient : ${recette.ingredients}"
+		                                    <li th:remove="all">sel-poivre</li>
+		                                    <li th:remove="all">Farine</li>
+		                                    <li th:each="ingredient : ${#lists.sort(recette.ingredients)}"
 		                                        th:text="${(ingredient.quantite +
 		                                        ' ' + ingredient.uniteDeMesure.description +
-		                                        ' - ' + ingredient.description)}">1 Teaspoon of Sugar</li>
+		                                        ' - ' + ingredient.description)}">sucre</li>
 		                                </ul>
 		                            </div>
+		                            <!-- 
 		                            <div class="col-md-2 ">
 		                                <a class="btn btn-outline-primary" href="#" th:href="@{'/recette/' + ${recette.id} + '/ingredients'}" role="button">Modifier</a>
 		                            </div>
+		                             -->
 		                        </div>
 		                    </div>
 		                </div>
@@ -132,6 +134,9 @@
 		                    </div>
 		                </div>
 		            </div>
+		            <div class = "col-md-2 col-md-offset-5"> 
+		            	  <a style="margin-bottom: 60px" class="btn btn-primary" href="#" th:href="@{'/'}" role="button">Retour</a>
+			       </div>
 		        </div>
 		    </div>
 		</div>
