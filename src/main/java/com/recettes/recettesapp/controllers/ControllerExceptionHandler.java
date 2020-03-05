@@ -14,7 +14,7 @@ public class ControllerExceptionHandler {
 	public ModelAndView handleNumberFormat(Exception e) {
 		
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("recette/erreur400");
+		modelView.setViewName("erreurs/erreur400");
 		modelView.addObject("exception", e);
 		
 		return modelView;

@@ -48,9 +48,10 @@ public class ImageController {
 	@PostMapping("/{id}/image")
 	public String uploadImage(@PathVariable String id, @RequestParam("fichierImg") MultipartFile fichier) {
 		
-		imageService.saveImage(Long.valueOf(id), fichier);
+		if(!fichier.isEmpty())
+			imageService.saveImage(Long.valueOf(id), fichier);
 		
-		return "redirect:/recette/" + id + "/detail"; 
+		return "redirect:/recette/" + id + "/modifier"; 
 	}
 	
 	

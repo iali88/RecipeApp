@@ -94,7 +94,7 @@ public class RecetteController {
 	public ModelAndView methodeNotFound(Exception e) {
 		
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("recette/erreur404");
+		modelView.setViewName("erreurs/erreur404");
 		modelView.addObject("exception", e);
 		
 		return modelView;
