@@ -16,6 +16,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Recette implements Comparable<Recette>{
@@ -24,14 +28,23 @@ public class Recette implements Comparable<Recette>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+	@NotBlank
+	@Size(min=3,max=255)
     private String description;
     
+	@Min(1)
+	@Max(999)
     private Integer tpsPreparation;
     
+	@Min(1)
+	@Max(999)
     private Integer tpsCuisson;
     
+	@Min(1)
+	@Max(100)
     private Integer nbPersonnes;
 
+	@NotBlank
     @Lob
     private String instructions;
 

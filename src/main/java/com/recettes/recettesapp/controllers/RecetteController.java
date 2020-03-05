@@ -1,17 +1,22 @@
 package com.recettes.recettesapp.controllers;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.recettes.recettesapp.entity.Recette;
+import com.recettes.recettesapp.exceptions.NotFoundException;
 import com.recettes.recettesapp.services.CategorieService;
 import com.recettes.recettesapp.services.RecetteService;
 
@@ -47,11 +52,21 @@ public class RecetteController {
     }
     
 	@PostMapping
-	public String saveOrUpdateRecette(@ModelAttribute Recette recette ) {
+	public ModelAndView saveOrUpdateRecette(@Valid @ModelAttribute Recette recette, BindingResult bindingResult ) {
 
+		ModelAndView modelView = new ModelAndView();
+		modelView.setViewName("redirect:/");
+		
+		if(bindingResult.hasErrors()) {
+			
+			modelView.addObject("categories", categorieService.getAllCategories());
+			modelView.setViewName("recette/recetteForm");
+			return modelView;
+		}
+		
 		Recette recetteSaved = recetteService.saveOrUpdate(recette);
 		
-		return "redirect:/";
+		return modelView;
 	}
 	
 	@GetMapping("/{id}/supprimer")
@@ -73,6 +88,16 @@ public class RecetteController {
 		model.addAttribute("categories", categorieService.getAllCategories());
 
 		return "recette/recetteForm";
+	}
+	
+	@ExceptionHandler(NotFoundException.class)
+	public ModelAndView methodeNotFound(Exception e) {
+		
+		ModelAndView modelView = new ModelAndView();
+		modelView.setViewName("recette/erreur404");
+		modelView.addObject("exception", e);
+		
+		return modelView;
 	}
 	
 }

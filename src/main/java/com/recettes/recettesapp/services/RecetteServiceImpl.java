@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.recettes.recettesapp.entity.Ingredient;
 import com.recettes.recettesapp.entity.Recette;
+import com.recettes.recettesapp.exceptions.NotFoundException;
 import com.recettes.recettesapp.repositories.RecetteDAO;
 
 @Service
@@ -43,7 +44,7 @@ public class RecetteServiceImpl implements RecetteService {
 		Optional<Recette> optRecette = recetteDAO.findById(id); 
 		
 		if (!optRecette.isPresent()) {
-            throw new RuntimeException("Recette non trouvée !");
+            throw new NotFoundException("Recette non trouvée ! [id = " + id.toString() + "]");
         }
 		
 		return optRecette.get();
@@ -78,7 +79,7 @@ public class RecetteServiceImpl implements RecetteService {
 			recetteBDD.setNiveau(recette.getNiveau());
 			recetteBDD.getCommentaire().setCommentaireRecette(recette.getCommentaire().getCommentaireRecette());
 			recetteBDD.setListeCategories(recette.getListeCategories());
-			
+			recetteBDD.setImage(recette.getImage());
 			recetteFinal = recetteDAO.save(recetteBDD);
 		}
 

@@ -1,6 +1,11 @@
 package com.recettes.recettesapp.bootstrap;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,8 +62,9 @@ public class RecetteBootstrap implements ApplicationListener<ContextRefreshedEve
 		Recette gclRecette = new Recette();
 		gclRecette.setDescription("Recette Guacamole");
 		gclRecette.setTpsPreparation(10);
-		gclRecette.setTpsCuisson(0);
+		gclRecette.setTpsCuisson(10);
 		gclRecette.setNiveau(Niveau.FACILE);
+		gclRecette.setImage(getImageByte("src/main/resources/static/images/guacamole400x400.jpg"));
 		
 		String instruction_gcl = "1. Préparer l'avocat : Couper l'avocat en deux. Enlever le noyau. Découper la chair de l'avocat avec un couteau, puis récupérer à l'aide d'une cuillère.\r\n" + 
 								 "2. Écraser à l'aide d'une fourchette : Avec une fourcette écraser l'avocat" + 
@@ -99,8 +105,9 @@ public class RecetteBootstrap implements ApplicationListener<ContextRefreshedEve
         Recette tacos = new Recette();
         tacos.setDescription("Recette Tacos");
         tacos.setTpsPreparation(10);
-        tacos.setTpsCuisson(0);
+        tacos.setTpsCuisson(10);
         tacos.setNiveau(Niveau.FACILE);
+        tacos.setImage(getImageByte("src/main/resources/static/images/tacos400x400.jpg"));
 		
 		String instructions_tacos = 
 				"1 Préparer le grill.\r\n " +
@@ -139,6 +146,38 @@ public class RecetteBootstrap implements ApplicationListener<ContextRefreshedEve
         
 		
 		return recette;
+	}
+
+	private Byte[] getImageByte(String src) {
+
+		byte[] bFile = null;
+
+		try {
+		
+			bFile = Files.readAllBytes(new File(src).toPath());
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return toByteObject(bFile);
+	}
+
+	private Byte[] toByteObject(byte[] bytes) throws RuntimeException {
+		
+		if(bytes == null) {
+			throw new RuntimeException("bytes == null") ;
+		}
+		
+		Byte[] byteObjects = new Byte[bytes.length];
+		
+		int i=0;    
+
+		for(byte b: bytes) {
+		   byteObjects[i++] = b; 
+		}
+		
+		return byteObjects;
 	}
 
 }
