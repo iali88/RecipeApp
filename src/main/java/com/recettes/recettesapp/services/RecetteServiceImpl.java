@@ -79,7 +79,6 @@ public class RecetteServiceImpl implements RecetteService {
 			recetteBDD.setNiveau(recette.getNiveau());
 			recetteBDD.getCommentaire().setCommentaireRecette(recette.getCommentaire().getCommentaireRecette());
 			recetteBDD.setListeCategories(recette.getListeCategories());
-			recetteBDD.setImage(recette.getImage());
 			recetteFinal = recetteDAO.save(recetteBDD);
 		}
 
